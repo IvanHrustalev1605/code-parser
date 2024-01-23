@@ -1,5 +1,7 @@
 package com.example.demo.controllers
 
+import com.example.demo.dto.ClassifierType
+import com.example.demo.dto.ClassifierValue
 import com.example.demo.dto.ResponseDto
 import com.example.demo.service.GetDataService
 import org.springframework.http.HttpStatus
@@ -17,7 +19,11 @@ class DataController(private val getDataService: GetDataService) {
         return ResponseEntity(getDataService.getData(), HttpStatus.OK)
     }
     @GetMapping("/8")
-    fun collectData8() : ResponseEntity<ResponseDto> {
-        return ResponseEntity(getDataService.getDataUrl8(), HttpStatus.OK)
+    fun collectData8() : ResponseEntity<MutableList<ClassifierValue>> {
+        return ResponseEntity(getDataService.saveDicValues(), HttpStatus.OK)
+    }
+    @GetMapping("/id")
+    fun byId() : ResponseEntity<List<ClassifierType>> {
+        return ResponseEntity(getDataService.findById(), HttpStatus.OK)
     }
 }
